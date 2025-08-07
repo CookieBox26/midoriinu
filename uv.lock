@@ -260,15 +260,24 @@ wheels = [
 
 [[package]]
 name = "cuda-bindings"
-version = "12.9.0"
+version = "12.9.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "cuda-pathfinder" },
     { name = "pywin32", marker = "sys_platform == 'win32'" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5f/bf/23a583b8453f580bb1c7749c7abf57017176e0053197384ce81e73977ab3/cuda_bindings-12.9.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:34318c3a1b442854f072f5bb410aea6834172fd1ee7a5ecf49f1d125ea7498a0", size = 11820737, upload-time = "2025-05-06T19:10:38.601Z" },
-    { url = "https://files.pythonhosted.org/packages/e3/03/40fc1488727a8d72ecc35f58f9df4939277892a837614339c3366d520426/cuda_bindings-12.9.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ff0e28d1e34758654b9c961e1f55e4786e49aee6a4dbceaf3cc24c46c672df7e", size = 12154006, upload-time = "2025-05-06T19:10:41.642Z" },
-    { url = "https://files.pythonhosted.org/packages/2c/6a/2808871d0b519364db2b460dc1b17d4fff3e340d5875144a303254f996e5/cuda_bindings-12.9.0-cp312-cp312-win_amd64.whl", hash = "sha256:57bdaa778116ee50fdcdd31810e0f345c23549ffb045452dc88d5c63601d35d4", size = 12223544, upload-time = "2025-05-06T19:10:43.928Z" },
+    { url = "https://files.pythonhosted.org/packages/da/56/e783a1c40905a09efd1ffc7177d4e5f9d54636b3de855bc161e77c9f1b2c/cuda_bindings-12.9.1-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a4e7f88aaccbac53016af2952be3ddb1ed2c6c994da37eff0a0e42e70b0cf6c8", size = 12076569, upload-time = "2025-08-07T02:22:22.557Z" },
+    { url = "https://files.pythonhosted.org/packages/0b/be/1fa4387dc1e3a8e5a84fece320d7e75c182284237c03aaa07a04b363d877/cuda_bindings-12.9.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:7cad3c719b1f637afd3b2507dd8d9ddc98a9a9eb4e83653ac98c3090f5fe3844", size = 12435566, upload-time = "2025-08-07T02:22:25.184Z" },
+    { url = "https://files.pythonhosted.org/packages/4f/de/1ad12dc29997e9ebd5d7cf9287668c0a84fc9cc95ab5fcdec501901c3e7c/cuda_bindings-12.9.1-cp312-cp312-win_amd64.whl", hash = "sha256:27e2a0a6509618cb8bd75175e694142fa0912912e615b9a3ff9ce666258af44e", size = 12374085, upload-time = "2025-08-07T02:22:27.71Z" },
+]
+
+[[package]]
+name = "cuda-pathfinder"
+version = "1.1.0"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/52/07/7978a4c4d8e70620170aa247ce16241a72d4cf6e4336bd3b296926baf7df/cuda_pathfinder-1.1.0-py3-none-any.whl", hash = "sha256:3e66fe0af8ead20eca25e077d2e0cb2dcc027d4297d550a74f99a0211e610799", size = 17673, upload-time = "2025-08-07T01:34:08.562Z" },
 ]
 
 [[package]]
@@ -462,6 +471,24 @@ version = "3.18.0"
 source = { registry = "https://download.pytorch.org/whl/nightly/cu128" }
 wheels = [
     { url = "https://download.pytorch.org/whl/nightly/filelock-3.18.0-py3-none-any.whl" },
+]
+
+[[package]]
+name = "flash-attn"
+version = "2.8.0"
+source = { url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.3.12/flash_attn-2.8.0+cu128torch2.7-cp312-cp312-linux_x86_64.whl" }
+dependencies = [
+    { name = "einops" },
+    { name = "torch" },
+]
+wheels = [
+    { url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.3.12/flash_attn-2.8.0+cu128torch2.7-cp312-cp312-linux_x86_64.whl", hash = "sha256:ecd5e1d425bb10d238e694a20094b40cdc8077e900e58a602958de018721a89d" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "einops" },
+    { name = "torch" },
 ]
 
 [[package]]
@@ -902,7 +929,9 @@ name = "midoriinu"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [
+    { name = "flash-attn" },
     { name = "numpy" },
+    { name = "openai-harmony" },
     { name = "pytorch-triton" },
     { name = "torch" },
     { name = "vllm" },
@@ -910,7 +939,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "flash-attn", url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.3.12/flash_attn-2.8.0+cu128torch2.7-cp312-cp312-linux_x86_64.whl" },
     { name = "numpy", specifier = ">=1.26.0,<2.0.0" },
+    { name = "openai-harmony" },
     { name = "pytorch-triton", specifier = "==3.4.0+git11ec6354" },
     { name = "torch", specifier = "==2.9.0.dev20250804+cu128" },
     { name = "vllm", specifier = "==0.10.1+gptoss" },
