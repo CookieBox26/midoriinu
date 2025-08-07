@@ -18,13 +18,19 @@ dependencies = [
     "torch==2.9.0.dev20250804+cu128",
     "vllm==0.10.1+gptoss",
     "openai-harmony",
-    "flash-attn @ https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.3.12/flash_attn-2.8.0+cu128torch2.7-cp312-cp312-linux_x86_64.whl",
+]
+
+[project.optional-dependencies]
+flash-attn = [
+    "flash-attn",
 ]
 
 [tool.uv]
 index-strategy = "unsafe-best-match"
+no-build-isolation-package = ["flash-attn"]
 extra-index-url = [
     "https://download.pytorch.org/whl/nightly/cu128",
     "https://download.pytorch.org/whl/nightly/",
     "https://wheels.vllm.ai/gpt-oss/",
+    "https://pypi.nvidia.com",
 ]
