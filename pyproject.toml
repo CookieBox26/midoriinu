@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "midoriinu"
+version = "0.0.1"
+description = "I love dogs."
+readme = "README.md"
+requires-python = "==3.12.*"
+authors = [{name="CookieBox26", email="cookie-box@cookie-box.info"}]
+dependencies = [
+    "numpy>=1.26.0,<2.0.0",
+    "pytorch-triton==3.4.0+git11ec6354",
+    "torch==2.9.0.dev20250804+cu128",
+    "vllm==0.10.1+gptoss",
+]
+
+[tool.uv]
+index-strategy = "unsafe-best-match"
+extra-index-url = [
+    "https://download.pytorch.org/whl/nightly/cu128",
+    "https://download.pytorch.org/whl/nightly/",
+    "https://wheels.vllm.ai/gpt-oss/",
+]
+
+#[[tool.uv.index]]
+#name = "torch-cuda"
+#url = "https://download.pytorch.org/whl/nightly/cu128"
+#explicit = true
+
+#[[tool.uv.index]]
+#name = "vllm-gptoss"
+#url = "https://wheels.vllm.ai/gpt-oss/"
+#explicit = true
+
+#[tool.uv.sources]
+#torch = [{index="torch-cuda", marker="sys_platform == 'linux'"}]
+#vllm = [{index="vllm-gptoss", marker="sys_platform == 'linux'"}]
